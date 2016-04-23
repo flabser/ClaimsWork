@@ -1,11 +1,12 @@
-package workflow.page.view;
+package claimswork.page.view;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
+
+import claimswork.dao.ClaimDAO;
 import kz.nextbase.script.actions._Action;
 import kz.nextbase.script.actions._ActionBar;
 import kz.nextbase.script.actions._ActionType;
-import workflow.dao.OfficeMemoDAO;
 
 public class OfficeMemoView extends AbstractWorkflowView {
 
@@ -18,7 +19,7 @@ public class OfficeMemoView extends AbstractWorkflowView {
 		actionBar.addAction(new _Action(getLocalizedWord("del_document", session.getLang()), "", _ActionType.DELETE_DOCUMENT));
 		addContent(actionBar);
 
-		addContent(getViewPage(new OfficeMemoDAO(session), formData));
+		addContent(getViewPage(new ClaimDAO(session), formData));
 	}
 
 	@Override

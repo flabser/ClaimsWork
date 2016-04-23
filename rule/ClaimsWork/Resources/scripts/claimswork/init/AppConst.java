@@ -1,13 +1,10 @@
-package workflow.init;
-
-import com.exponentus.dataengine.jpa.constants.AppCode;
+package claimswork.init;
 
 public class AppConst {
-	public static String NAME = "Workflow";
-	public static String NAME_ENG = "Workflow";
-	public static String NAME_RUS = "Служебные записки";
-	public static String NAME_KZ = "Служебные записки";
-	public static AppCode CODE = AppCode.WORKSPACE;
+	public static String NAME = "ClaimsWork";
+	public static String NAME_ENG = "ClaimsWork";
+	public static String NAME_RUS = "ПИР";
+	public static String NAME_KZ = "ПИР";
 	public static String DEFAULT_URL = "p?id=officememo-view";
 	public static String FT_INDEX_SCOPE = "";
 }

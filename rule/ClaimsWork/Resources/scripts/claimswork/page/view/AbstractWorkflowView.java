@@ -1,4 +1,4 @@
-package workflow.page.view;
+package claimswork.page.view;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
