@@ -1,5 +1,7 @@
 package claimswork.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -13,6 +15,10 @@ import reference.model.OrgCategory;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQuery(name = "AdminProceeding.findAll", query = "SELECT m FROM AdminProceeding AS m ORDER BY m.regDate")
 public class AdminProceeding extends Claim {
+
 	private OrgCategory claimant;
 
+	private Date basisDate;
+
+	private Date dueDate;
 }

@@ -17,8 +17,8 @@ public class MainNavigator extends _DoPage {
 	public void doGET(_Session session, _WebFormData formData) {
 		List<IOutcomeObject> list = new ArrayList<IOutcomeObject>();
 
-		_Outline common_outline = new _Outline(getLocalizedWord("workflow", session.getLang()), "common");
-		common_outline.addEntry(new _OutlineEntry(getLocalizedWord("office_memo", session.getLang()), "officememo-view"));
+		_Outline common_outline = new _Outline(getLocalizedWord("claimswork", session.getLang()), "common");
+		common_outline.addEntry(new _OutlineEntry(getLocalizedWord("claims_work", session.getLang()), "all-view"));
 
 		list.add(common_outline);
 
