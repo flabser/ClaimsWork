@@ -34,7 +34,7 @@ import kz.nextbase.script.actions._Action;
 import kz.nextbase.script.actions._ActionBar;
 import kz.nextbase.script.actions._ActionType;
 
-public class OfficeMemoForm extends _DoPage {
+public class CivilProceedingForm extends _DoPage {
 
 	@Override
 	public void doGET(_Session session, _WebFormData formData) {

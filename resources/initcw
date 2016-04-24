@@ -20,3 +20,7 @@ stini staff.init.FillTestUsers
 #SPECIFIC
 stini reference.init.FillClaimDecisionTypes
 stini reference.init.FillDefendantTypes
+stini reference.init.FillDisputeTypes
+stini reference.init.FillLawArticles
+stini reference.init.FillLawBranches
+stini reference.init.FillResponsibleTypes
