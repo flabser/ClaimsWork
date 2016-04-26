@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
@@ -22,17 +21,16 @@ import com.exponentus.scripting._POJOListWrapper;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._Validation;
 import com.exponentus.scripting._WebFormData;
+import com.exponentus.scripting.actions._Action;
+import com.exponentus.scripting.actions._ActionBar;
+import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoPage;
-import com.exponentus.server.Server;
 import com.exponentus.user.IUser;
 import com.exponentus.webserver.servlet.UploadedFile;
 
 import claimswork.dao.ClaimDAO;
 import claimswork.model.Claim;
 import kz.flabs.util.Util;
-import kz.nextbase.script.actions._Action;
-import kz.nextbase.script.actions._ActionBar;
-import kz.nextbase.script.actions._ActionType;
 
 public class CivilProceedingForm extends _DoPage {
 
@@ -48,23 +46,20 @@ public class CivilProceedingForm extends _DoPage {
 			addValue("formsesid", Util.generateRandomAsText());
 
 			String attachmentId = formData.getValueSilently("attachment");
-			/*if (!attachmentId.isEmpty() && entity.getAttachments() != null) {
-				Attachment att = entity.getAttachments().stream().filter(it -> it.getIdentifier().equals(attachmentId)).findFirst().get();
-
-				try {
-					String filePath = getTmpDirPath() + File.separator + Util.generateRandomAsText("qwertyuiopasdfghjklzxcvbnm", 10)
-					        + att.getRealFileName();
-					File attFile = new File(filePath);
-					FileUtils.writeByteArrayToFile(attFile, att.getFile());
-					showFile(filePath, att.getRealFileName());
-					Environment.fileToDelete.add(filePath);
-				} catch (IOException ioe) {
-					Server.logger.errorLogEntry(ioe);
-				}
-				return;
-			} else {
-				setBadRequest();
-			}*/
+			/*
+			 * if (!attachmentId.isEmpty() && entity.getAttachments() != null) {
+			 * Attachment att = entity.getAttachments().stream().filter(it ->
+			 * it.getIdentifier().equals(attachmentId)).findFirst().get();
+			 * 
+			 * try { String filePath = getTmpDirPath() + File.separator +
+			 * Util.generateRandomAsText("qwertyuiopasdfghjklzxcvbnm", 10) +
+			 * att.getRealFileName(); File attFile = new File(filePath);
+			 * FileUtils.writeByteArrayToFile(attFile, att.getFile());
+			 * showFile(filePath, att.getRealFileName());
+			 * Environment.fileToDelete.add(filePath); } catch (IOException ioe)
+			 * { Server.logger.errorLogEntry(ioe); } return; } else {
+			 * setBadRequest(); }
+			 */
 		} else {
 			entity = new Claim();
 			entity.setAuthor(user);
