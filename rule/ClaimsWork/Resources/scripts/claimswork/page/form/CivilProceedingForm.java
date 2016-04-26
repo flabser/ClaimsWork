@@ -26,11 +26,11 @@ import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.scripting.event._DoPage;
 import com.exponentus.user.IUser;
+import com.exponentus.util.Util;
 import com.exponentus.webserver.servlet.UploadedFile;
 
 import claimswork.dao.ClaimDAO;
 import claimswork.model.Claim;
-import kz.flabs.util.Util;
 
 public class CivilProceedingForm extends _DoPage {
 
@@ -45,21 +45,7 @@ public class CivilProceedingForm extends _DoPage {
 			entity = dao.findById(UUID.fromString(id));
 			addValue("formsesid", Util.generateRandomAsText());
 
-			String attachmentId = formData.getValueSilently("attachment");
-			/*
-			 * if (!attachmentId.isEmpty() && entity.getAttachments() != null) {
-			 * Attachment att = entity.getAttachments().stream().filter(it ->
-			 * it.getIdentifier().equals(attachmentId)).findFirst().get();
-			 * 
-			 * try { String filePath = getTmpDirPath() + File.separator +
-			 * Util.generateRandomAsText("qwertyuiopasdfghjklzxcvbnm", 10) +
-			 * att.getRealFileName(); File attFile = new File(filePath);
-			 * FileUtils.writeByteArrayToFile(attFile, att.getFile());
-			 * showFile(filePath, att.getRealFileName());
-			 * Environment.fileToDelete.add(filePath); } catch (IOException ioe)
-			 * { Server.logger.errorLogEntry(ioe); } return; } else {
-			 * setBadRequest(); }
-			 */
+			formData.getValueSilently("attachment");
 		} else {
 			entity = new Claim();
 			entity.setAuthor(user);
