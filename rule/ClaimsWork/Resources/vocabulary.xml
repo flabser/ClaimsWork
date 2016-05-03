@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <vocabulary primary="ENG">
-    <sentence mode="on" keyword="office_memo">
-        <entry lang="RUS">Служебные записки</entry>
-        <entry lang="ENG">Officememo</entry>
-    </sentence>
-    <sentence mode="on" keyword="signer">
-        <entry lang="RUS">Подписывающий</entry>
-        <entry lang="ENG">Signer</entry>
-    </sentence>
-    <sentence mode="on" keyword="officememo">
-        <entry lang="RUS">Служебная записка</entry>
-        <entry lang="ENG">Officememo</entry>
-    </sentence>
     <sentence mode="on" keyword="claim_decision_type">
         <entry lang="RUS">Решения принимаемые органом уголовного преследования</entry>
         <entry lang="ENG">Decisions made by criminal prosecution authority</entry>
@@ -21,7 +9,7 @@
         <entry lang="ENG">person concerning whom check is carried out</entry>
     </sentence>
     <sentence mode="on" keyword="dispute_type">
-        <entry lang="RUS">Характер правонарушения</entry>
+        <entry lang="RUS">Характер спора</entry>
         <entry lang="ENG">Character dispute</entry>
     </sentence>
     <sentence mode="on" keyword="law_article">
@@ -35,5 +23,29 @@
     <sentence mode="on" keyword="responsible_type">
         <entry lang="RUS">Вид ответственного лица</entry>
         <entry lang="ENG">Responsible type</entry>
+    </sentence>
+    <sentence mode="on" keyword="claims_work">
+        <entry lang="RUS">Претензионно-исковая работа</entry>
+        <entry lang="ENG">Claims work</entry>
+    </sentence>
+    <sentence mode="on" keyword="civil_proceedings">
+        <entry lang="RUS">Гражданское производство</entry>
+        <entry lang="ENG">Сivil proceeding</entry>
+    </sentence>
+    <sentence mode="on" keyword="number">
+        <entry lang="RUS">Номер</entry>
+        <entry lang="ENG">Number</entry>
+    </sentence>
+    <sentence mode="on" keyword="executor">
+        <entry lang="RUS">Исполнитель</entry>
+        <entry lang="ENG">Executor</entry>
+    </sentence>
+    <sentence mode="on" keyword="division">
+        <entry lang="RUS">Подразделение</entry>
+        <entry lang="ENG">Division</entry>
+    </sentence>
+    <sentence mode="on" keyword="proceedings_type">
+        <entry lang="RUS">Вид производства</entry>
+        <entry lang="ENG">Proceedings type</entry>
     </sentence>
 </vocabulary>

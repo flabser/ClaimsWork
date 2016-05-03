@@ -9,7 +9,7 @@
     <xsl:template name="_content">
         <div class="content-header">
             <xsl:call-template name="page-info">
-                <xsl:with-param name="title" select="//captions/claims_work/@caption"/>
+                <xsl:with-param name="title" select="//captions/civil_proceedings/@caption"/>
             </xsl:call-template>
         </div>
         <div class="content-body">

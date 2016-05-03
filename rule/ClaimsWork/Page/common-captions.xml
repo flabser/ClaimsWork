@@ -56,4 +56,12 @@
     <caption name="new_contract"/>
     <caption name="office_memo"/>
 
+    <caption name="claims_work"/>
+    <caption name="civil_proceedings"/>
+
+    <caption name="number"/>
+    <caption name="executor"/>
+    <caption name="division"/>
+    <caption name="proceedings_type"/>
+
 </rule>
