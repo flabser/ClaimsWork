@@ -48,4 +48,24 @@
         <entry lang="RUS">Вид производства</entry>
         <entry lang="ENG">Proceedings type</entry>
     </sentence>
+    <sentence mode="on" keyword="claimant">
+        <entry lang="RUS">Истец</entry>
+        <entry lang="ENG">Claimant</entry>
+    </sentence>
+    <sentence mode="on" keyword="defendant">
+        <entry lang="RUS">Ответчик</entry>
+        <entry lang="ENG">Defendant</entry>
+    </sentence>
+    <sentence mode="on" keyword="application_date">
+        <entry lang="RUS">Дата поступления</entry>
+        <entry lang="ENG">Application date</entry>
+    </sentence>
+    <sentence mode="on" keyword="control_date">
+        <entry lang="RUS">Дата исполнения</entry>
+        <entry lang="ENG">Control date</entry>
+    </sentence>
+    <sentence mode="on" keyword="state_tax_cost">
+        <entry lang="RUS">Сумма гос. пошлины</entry>
+        <entry lang="ENG">State tax cost</entry>
+    </sentence>
 </vocabulary>
