@@ -7,9 +7,21 @@
                 <xsl:value-of select="//captions/organization/@caption"/>
             </div>
             <div class="controls">
-                <select name="organization" class="span7" autocomplete="off">
-                    <option value=""></option>
+                <select name="organization" class="span8">
                     <xsl:apply-templates select="fields/organization" mode="selected_options"/>
+                </select>
+            </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="executor">
+        <div class="form-group">
+            <div class="control-label">
+                <xsl:value-of select="//captions/executor/@caption"/>
+            </div>
+            <div class="controls">
+                <select name="executor" class="span8">
+                    <xsl:apply-templates select="fields/executor" mode="selected_options"/>
                 </select>
             </div>
         </div>
@@ -146,7 +158,7 @@
                 <xsl:value-of select="//captions/law_article/@caption"/>
             </div>
             <div class="controls">
-                <select name="propertycode" class="span8">
+                <select name="lawarticle" class="span8">
                     <xsl:apply-templates select="fields/lawarticle" mode="selected_options"/>
                 </select>
             </div>

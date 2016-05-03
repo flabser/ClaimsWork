@@ -47,6 +47,7 @@
                         <fieldset class="fieldset">
                             <xsl:call-template name="reg_number"/>
                             <xsl:call-template name="organization"/>
+                            <xsl:call-template name="executor"/>
                             <xsl:call-template name="claimant"/>
                             <xsl:call-template name="defendant"/>
                             <xsl:call-template name="lawarticle"/>
