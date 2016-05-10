@@ -187,6 +187,12 @@
         </div>
     </xsl:template>
 
+    <xsl:template name="status">
+        <!-- Статус -->
+        <input type="hidden" name="status" value="0"/>
+        <input type="hidden" name="ProceedingStatusType" value="0"/>
+    </xsl:template>
+
     <xsl:template name="tags">
         <!-- Метки -->
         <div class="form-group">

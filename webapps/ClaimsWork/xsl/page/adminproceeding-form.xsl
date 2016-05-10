@@ -58,6 +58,7 @@
                             <xsl:call-template name="lawbranch"/>
                             <xsl:call-template name="statetaxcost"/>
                             <xsl:call-template name="responsibletype"/>
+                            <xsl:call-template name="status"/>
                         </fieldset>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="tabs-2">
