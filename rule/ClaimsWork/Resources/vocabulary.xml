@@ -32,6 +32,14 @@
         <entry lang="RUS">Гражданское производство</entry>
         <entry lang="ENG">Сivil proceeding</entry>
     </sentence>
+    <sentence mode="on" keyword="admin_proceedings">
+        <entry lang="RUS">Административное производство</entry>
+        <entry lang="ENG">Administrative proceeding</entry>
+    </sentence>
+    <sentence mode="on" keyword="criminal_proceedings">
+        <entry lang="RUS">Уголовное производство</entry>
+        <entry lang="ENG">Criminal proceeding</entry>
+    </sentence>
     <sentence mode="on" keyword="number">
         <entry lang="RUS">Номер</entry>
         <entry lang="ENG">Number</entry>
@@ -67,5 +75,13 @@
     <sentence mode="on" keyword="state_tax_cost">
         <entry lang="RUS">Сумма гос. пошлины</entry>
         <entry lang="ENG">State tax cost</entry>
+    </sentence>
+    <sentence mode="on" keyword="contention">
+        <entry lang="RUS">Предмет спора</entry>
+        <entry lang="ENG">Contention</entry>
+    </sentence>
+    <sentence mode="on" keyword="contention">
+        <entry lang="RUS">Предмет спора</entry>
+        <entry lang="ENG">Contention</entry>
     </sentence>
 </vocabulary>

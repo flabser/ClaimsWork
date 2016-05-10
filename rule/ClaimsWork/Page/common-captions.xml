@@ -58,10 +58,13 @@
 
     <caption name="claims_work"/>
     <caption name="civil_proceedings"/>
+    <caption name="admin_proceedings"/>
+    <caption name="criminal_proceedings"/>
 
     <caption name="number"/>
     <caption name="executor"/>
     <caption name="division"/>
     <caption name="proceedings_type"/>
+    <caption name="contention"/>
 
 </rule>

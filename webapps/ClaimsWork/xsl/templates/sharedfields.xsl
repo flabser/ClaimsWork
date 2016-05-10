@@ -7,8 +7,21 @@
                 <xsl:value-of select="//captions/organization/@caption"/>
             </div>
             <div class="controls">
-                <select name="organization" class="span8">
+                <select name="organization" class="span6">
                     <xsl:apply-templates select="fields/organization" mode="selected_options"/>
+                </select>
+            </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="department">
+        <div class="form-group">
+            <div class="control-label">
+                <xsl:value-of select="//captions/department/@caption"/>
+            </div>
+            <div class="controls">
+                <select name="department" class="span6">
+                    <xsl:apply-templates select="fields/department" mode="selected_options"/>
                 </select>
             </div>
         </div>
@@ -20,7 +33,7 @@
                 <xsl:value-of select="//captions/executor/@caption"/>
             </div>
             <div class="controls">
-                <select name="executor" class="span8">
+                <select name="executor" class="span6">
                     <xsl:apply-templates select="fields/executor" mode="selected_options"/>
                 </select>
             </div>
@@ -39,61 +52,6 @@
         </div>
     </xsl:template>
 
-    <xsl:template name="property_status_type">
-        <!-- property_status -->
-        <div class="form-group">
-            <div class="control-label">
-                <xsl:value-of select="//captions/property_status/@caption"/>
-            </div>
-            <div class="controls">
-                <xsl:apply-templates select="//constants[@entity = 'propertystatustype']/entry[@attrval != 'UNKNOWN']"
-                                     mode="constants">
-                    <xsl:with-param name="select" select="fields/propertystatus"/>
-                    <xsl:with-param name="type" select="'radio'"/>
-                </xsl:apply-templates>
-            </div>
-        </div>
-    </xsl:template>
-
-    <xsl:template name="invnumber">
-        <!-- Инвентарный номер -->
-        <div class="form-group">
-            <div class="control-label">
-                <xsl:value-of select="//captions/inv_number/@caption"/>
-            </div>
-            <div class="controls">
-                <input type="text" name="invnumber" value="{fields/invnumber}" class="span3"/>
-            </div>
-        </div>
-    </xsl:template>
-
-    <xsl:template name="objectname">
-        <!-- Наименование объекта -->
-        <div class="form-group">
-            <div class="control-label">
-                <xsl:value-of select="//captions/object_name/@caption"/>
-            </div>
-            <div class="controls">
-                <textarea name="objectname" class="span8">
-                    <xsl:value-of select="fields/objectname"/>
-                </textarea>
-            </div>
-        </div>
-    </xsl:template>
-
-    <xsl:template name="description">
-        <!-- Описание объекта -->
-        <div class="form-group">
-            <div class="control-label">
-                <xsl:value-of select="//captions/description/@caption"/>
-            </div>
-            <div class="controls">
-                <textarea name="description" class="span8">
-                    <xsl:value-of select="fields/description"/>
-                </textarea>
-            </div>
-        </div>
-    </xsl:template>
 
     <xsl:template name="defendant">
         <!-- Ответчик -->
@@ -102,7 +60,7 @@
                 <xsl:value-of select="//captions/defendant/@caption"/>
             </div>
             <div class="controls">
-                <select name="defendant" class="span8">
+                <select name="defendant" class="span6">
                     <xsl:apply-templates select="fields/defendant" mode="selected_options"/>
                 </select>
             </div>
@@ -116,7 +74,7 @@
                 <xsl:value-of select="//captions/claimant/@caption"/>
             </div>
             <div class="controls">
-                <select name="claimant" class="span8">
+                <select name="claimant" class="span6">
                     <xsl:apply-templates select="fields/claimant" mode="selected_options"/>
                 </select>
             </div>
@@ -172,7 +130,7 @@
                 <xsl:value-of select="//captions/responsible_type/@caption"/>
             </div>
             <div class="controls">
-                <select name="responsibletype" class="span8">
+                <select name="responsibletype" class="span6">
                     <xsl:apply-templates select="fields/responsibletype" mode="selected_options"/>
                 </select>
             </div>
@@ -191,8 +149,22 @@
         </div>
     </xsl:template>
 
+    <xsl:template name="contention">
+        <!-- Предмет спора -->
+        <div class="form-group">
+            <div class="control-label">
+                <xsl:value-of select="//captions/contention/@caption"/>
+            </div>
+            <div class="controls">
+                <textarea name="contention" value="{fields/contention}" class="span6">
+                    <xsl:value-of select="fields/contention"/>
+                </textarea>
+            </div>
+        </div>
+    </xsl:template>
+
     <xsl:template name="controldate">
-        <!-- Дата принятия на баланс -->
+        <!-- Дата исполнения -->
         <div class="form-group">
             <div class="control-label">
                 <xsl:value-of select="//captions/control_date/@caption"/>
