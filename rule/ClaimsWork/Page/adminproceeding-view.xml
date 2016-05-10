@@ -2,7 +2,7 @@
 <rule  mode="on" >
     <description></description>
     <caching>NO_CACHING</caching>
-    <xsltfile>DEFAULT</xsltfile>
+    <xsltfile>page/civilproceeding-view.xsl</xsltfile>
     <element mode="ON" type="SCRIPT">
         <name>view_content</name>
         <events>
