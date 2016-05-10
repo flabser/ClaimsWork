@@ -3,7 +3,7 @@ nbApp.selectOptions = {
         url: 'p?id=get-organizations'
     },
     department: {
-        url: 'p?id=get-departments'
+        url: 'p?id=get-departmentslist'
     },
     claimant: {
         url: 'p?id=get-defendanttype'
