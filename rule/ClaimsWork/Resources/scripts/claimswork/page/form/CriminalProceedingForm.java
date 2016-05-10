@@ -1,7 +1,7 @@
 package claimswork.page.form;
 
-import claimswork.dao.CriminalProceedingDAO;
-import claimswork.model.CriminalProceeding;
+import claimswork.dao.ClaimDAO;
+import claimswork.model.Claim;
 import com.exponentus.common.model.Attachment;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
@@ -36,16 +36,16 @@ public class CriminalProceedingForm extends _DoPage {
 	public void doGET(_Session session, _WebFormData formData) {
 
 		IUser<Long> user = session.getUser();
-		CriminalProceeding entity;
+		Claim entity;
 		String id = formData.getValueSilently("docid");
 		if (!id.isEmpty()) {
-			CriminalProceedingDAO dao = new CriminalProceedingDAO(session);
+			ClaimDAO dao = new ClaimDAO(session);
 			entity = dao.findById(UUID.fromString(id));
 			addValue("formsesid", Util.generateRandomAsText());
 
 			formData.getValueSilently("attachment");
 		} else {
-			entity = new CriminalProceeding();
+			entity = new Claim();
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
 			String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
@@ -93,13 +93,13 @@ public class CriminalProceedingForm extends _DoPage {
 				return;
 			}
 
-			CriminalProceedingDAO dao = new CriminalProceedingDAO(session);
-			CriminalProceeding entity;
+			ClaimDAO dao = new ClaimDAO(session);
+			Claim entity;
 			String id = formData.getValueSilently("docid");
 			boolean isNew = id.isEmpty();
 
 			if (isNew) {
-				entity = new CriminalProceeding();
+				entity = new Claim();
 			} else {
 				entity = dao.findById(id);
 			}

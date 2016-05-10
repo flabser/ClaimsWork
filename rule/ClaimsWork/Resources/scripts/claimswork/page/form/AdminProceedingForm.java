@@ -1,7 +1,7 @@
 package claimswork.page.form;
 
-import claimswork.dao.AdminProceedingDAO;
-import claimswork.model.AdminProceeding;
+import claimswork.dao.ClaimDAO;
+import claimswork.model.Claim;
 import com.exponentus.common.model.Attachment;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
@@ -36,16 +36,16 @@ public class AdminProceedingForm extends _DoPage {
 	public void doGET(_Session session, _WebFormData formData) {
 
 		IUser<Long> user = session.getUser();
-		AdminProceeding entity;
+		Claim entity;
 		String id = formData.getValueSilently("docid");
 		if (!id.isEmpty()) {
-			AdminProceedingDAO dao = new AdminProceedingDAO(session);
+			ClaimDAO dao = new ClaimDAO(session);
 			entity = dao.findById(UUID.fromString(id));
 			addValue("formsesid", Util.generateRandomAsText());
 
 			formData.getValueSilently("attachment");
 		} else {
-			entity = new AdminProceeding();
+			entity = new Claim();
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
 			String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
@@ -93,13 +93,13 @@ public class AdminProceedingForm extends _DoPage {
 				return;
 			}
 
-			AdminProceedingDAO dao = new AdminProceedingDAO(session);
-			AdminProceeding entity;
+			ClaimDAO dao = new ClaimDAO(session);
+			Claim entity;
 			String id = formData.getValueSilently("docid");
 			boolean isNew = id.isEmpty();
 
 			if (isNew) {
-				entity = new AdminProceeding();
+				entity = new Claim();
 			} else {
 				entity = dao.findById(id);
 			}
@@ -138,13 +138,6 @@ public class AdminProceedingForm extends _DoPage {
 
 	private _Validation validate(_WebFormData formData, LanguageCode lang) {
 		_Validation ve = new _Validation();
-
-		if (formData.getValueSilently("summary").isEmpty()) {
-			ve.addError("summary", "required", getLocalizedWord("field_is_empty", lang));
-		}
-		if (formData.getValueSilently("content").isEmpty()) {
-			ve.addError("content", "required", getLocalizedWord("field_is_empty", lang));
-		}
 
 		return ve;
 	}
