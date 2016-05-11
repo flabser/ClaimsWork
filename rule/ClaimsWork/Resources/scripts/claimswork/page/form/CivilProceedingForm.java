@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import claimswork.dao.ClaimDAO;
+import claimswork.model.Claim;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
@@ -29,8 +31,10 @@ import com.exponentus.user.IUser;
 import com.exponentus.util.Util;
 import com.exponentus.webserver.servlet.UploadedFile;
 
-import claimswork.dao.ClaimDAO;
-import claimswork.model.Claim;
+import claimswork.dao.CivilProceedingDAO;
+import claimswork.model.CivilProceeding;
+import staff.dao.DepartmentDAO;
+import staff.model.Department;
 
 public class CivilProceedingForm extends _DoPage {
 
@@ -50,6 +54,9 @@ public class CivilProceedingForm extends _DoPage {
 			entity = new Claim();
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
+			Department tempDpt = new Department();
+			entity.setDepartment(tempDpt);
+			tempDpt.setName("");
 			String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 			addValue("formsesid", fsId);
 			List<String> formFiles = null;
@@ -95,13 +102,13 @@ public class CivilProceedingForm extends _DoPage {
 				return;
 			}
 
-			ClaimDAO dao = new ClaimDAO(session);
-			Claim entity;
+			CivilProceedingDAO dao = new CivilProceedingDAO(session);
+			CivilProceeding entity;
 			String id = formData.getValueSilently("docid");
 			boolean isNew = id.isEmpty();
 
 			if (isNew) {
-				entity = new Claim();
+				entity = new CivilProceeding();
 			} else {
 				entity = dao.findById(id);
 			}
@@ -119,6 +126,12 @@ public class CivilProceedingForm extends _DoPage {
 					att.setForm("attachment");
 					// entity.getAttachments().add(att);
 				}
+			}
+			entity.setRegNumber(formData.getValueSilently("regnumber"));
+			if (formData.containsField("department")) {
+				DepartmentDAO dDao = new DepartmentDAO(session);
+				Department dept = dDao.findById(formData.getValueSilently("department"));
+				entity.setDepartment(dept);
 			}
 
 			if (isNew) {
@@ -141,12 +154,6 @@ public class CivilProceedingForm extends _DoPage {
 	private _Validation validate(_WebFormData formData, LanguageCode lang) {
 		_Validation ve = new _Validation();
 
-		if (formData.getValueSilently("summary").isEmpty()) {
-			ve.addError("summary", "required", getLocalizedWord("field_is_empty", lang));
-		}
-		if (formData.getValueSilently("content").isEmpty()) {
-			ve.addError("content", "required", getLocalizedWord("field_is_empty", lang));
-		}
 
 		return ve;
 	}

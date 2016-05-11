@@ -47,7 +47,7 @@
                 <xsl:value-of select="//captions/reg_number/@caption"/>
             </div>
             <div class="controls">
-                <input type="text" name="type" value="{fields/regnumber}" class="span2"/>
+                <input type="text" name="regnumber" value="{fields/regnumber}" class="span2"/>
             </div>
         </div>
     </xsl:template>
@@ -88,8 +88,8 @@
                 <xsl:value-of select="//captions/dispute_type/@caption"/>
             </div>
             <div class="controls">
-                <select name="disputetype" class="span8">
-                    <xsl:apply-templates select="fields/disputetype" mode="selected_options"/>
+                <select name="disputeType" class="span8">
+                    <xsl:apply-templates select="fields/dispuTetype" mode="selected_options"/>
                 </select>
             </div>
         </div>
@@ -156,7 +156,7 @@
                 <xsl:value-of select="//captions/contention/@caption"/>
             </div>
             <div class="controls">
-                <textarea name="contention" value="{fields/contention}" class="span6">
+                <textarea name="basis" value="{fields/basis}" class="span6">
                     <xsl:value-of select="fields/contention"/>
                 </textarea>
             </div>
@@ -175,22 +175,22 @@
         </div>
     </xsl:template>
 
-    <xsl:template name="statetaxcost">
+    <xsl:template name="state_fees">
         <!-- Сумма государственной пошлины -->
         <div class="form-group">
             <div class="control-label">
                 <xsl:value-of select="//captions/state_tax_cost/@caption"/>
             </div>
             <div class="controls">
-                <input type="number" name="statetaxcost" value="{fields/statetaxcost}" class="span3"/>
+                <input type="number" name="stateFees" value="{fields/stateFees}" class="span3"/>
             </div>
         </div>
     </xsl:template>
 
     <xsl:template name="status">
         <!-- Статус -->
-        <input type="hidden" name="status" value="0"/>
-        <input type="hidden" name="ProceedingStatusType" value="0"/>
+        <input type="hidden" name="status" value="1"/>
+        <input type="hidden" name="ProceedingStatusType" value="1"/>
     </xsl:template>
 
     <xsl:template name="tags">

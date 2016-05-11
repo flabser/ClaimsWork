@@ -20,11 +20,13 @@ import com.exponentus.common.model.Attachment;
 import com.exponentus.dataengine.jpa.SecureAppEntity;
 
 import claimswork.model.constants.ProceedingStatusType;
-import reference.model.DisputeType;
-import reference.model.LawArticle;
-import reference.model.LawBranch;
-import reference.model.ResponsibleType;
+import com.exponentus.scripting._Session;
+import com.exponentus.util.NumberUtil;
+import com.exponentus.util.Util;
+import reference.model.*;
+import staff.dao.EmployeeDAO;
 import staff.model.Department;
+import staff.model.Employee;
 
 @Entity
 @Table(name = "claims")
@@ -33,7 +35,7 @@ public class Claim extends SecureAppEntity<UUID> {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false, length = 32)
-	private ProceedingStatusType status;
+	private ProceedingStatusType status = ProceedingStatusType.UNKNOWN;
 
 	private Department department;
 
@@ -57,6 +59,9 @@ public class Claim extends SecureAppEntity<UUID> {
 	@Column(name = "matter_of_dispute")
 	private String matterOfDispute;
 
+	@Column(name = "reg_number")
+	private String regNumber;
+
 	@ManyToOne
 	@JoinColumn
 	private LawArticle lawArticle;
@@ -65,4 +70,43 @@ public class Claim extends SecureAppEntity<UUID> {
 	@JoinColumn
 	private ResponsibleType responsible;
 
+
+	public String getRegNumber() {
+		return regNumber;
+	}
+
+	public void setRegNumber(String regNumber) {
+		this.regNumber = regNumber;
+	}
+
+	public Department getDepartment(){return department;}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	@Override
+	public String getShortXMLChunk(_Session ses) {
+		StringBuilder chunk = new StringBuilder(1000);
+		chunk.append("<regnumber>" + regNumber + "</regnumber>");
+		chunk.append("<department>" + department.getLocalizedName(ses.getLang()) + "</department>");
+		return chunk.toString();
+	}
+
+	@Override
+	public String getFullXMLChunk(_Session ses) {
+		StringBuilder chunk = new StringBuilder(1000);
+		chunk.append("<regdate>" + Util.simpleDateTimeFormat.format(regDate) + "</regdate>");
+		EmployeeDAO eDao = new EmployeeDAO(ses);
+		Employee user = eDao.findByUserId(author);
+		if (user != null) {
+			chunk.append("<author>" + user.getName() + "</author>");
+		} else {
+			chunk.append("<author></author>");
+		}
+
+		chunk.append("<regnumber>" + regNumber + "</regnumber>");
+		chunk.append("<department id=\"" + department.getId() + "\">" + department.getLocalizedName(ses.getLang()) + "</department>");
+		return chunk.toString();
+	}
 }

@@ -1,6 +1,8 @@
 package claimswork.page.form;
 
+import claimswork.dao.AdminProceedingDAO;
 import claimswork.dao.ClaimDAO;
+import claimswork.model.AdminProceeding;
 import claimswork.model.Claim;
 import com.exponentus.common.model.Attachment;
 import com.exponentus.env.EnvConst;
@@ -93,13 +95,13 @@ public class AdminProceedingForm extends _DoPage {
 				return;
 			}
 
-			ClaimDAO dao = new ClaimDAO(session);
-			Claim entity;
+			AdminProceedingDAO dao = new AdminProceedingDAO(session);
+			AdminProceeding entity;
 			String id = formData.getValueSilently("docid");
 			boolean isNew = id.isEmpty();
 
 			if (isNew) {
-				entity = new Claim();
+				entity = new AdminProceeding();
 			} else {
 				entity = dao.findById(id);
 			}

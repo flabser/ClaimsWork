@@ -56,7 +56,7 @@
                             <xsl:call-template name="controldate"/>
                             <xsl:call-template name="disputetype"/>
                             <xsl:call-template name="lawbranch"/>
-                            <xsl:call-template name="statetaxcost"/>
+                            <xsl:call-template name="state_fees"/>
                             <xsl:call-template name="responsibletype"/>
                             <xsl:call-template name="status"/>
                         </fieldset>

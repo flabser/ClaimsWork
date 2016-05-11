@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.exponentus.common.model.Attachment;
+import com.exponentus.scripting._Session;
+import com.exponentus.util.Util;
 
 @Entity
 @Table(name = "civil_proceedings")
@@ -39,4 +41,12 @@ public class CivilProceeding extends Claim {
 	        @JoinColumn(name = "attachment_id", referencedColumnName = "id") })
 	private List<Attachment> stateFeesAttachments;
 
+
+	@Override
+	public String getShortXMLChunk(_Session ses) {
+		StringBuilder chunk = new StringBuilder(1000);
+		chunk.append("<regnumber>" + getRegNumber() + "</regnumber>");
+		chunk.append("<department>" + getDepartment().getLocalizedName(ses.getLang()) + "</department>");
+		return chunk.toString();
+	}
 }

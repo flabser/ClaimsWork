@@ -1,7 +1,9 @@
 package claimswork.page.form;
 
 import claimswork.dao.ClaimDAO;
+import claimswork.dao.CriminalProceedingDAO;
 import claimswork.model.Claim;
+import claimswork.model.CriminalProceeding;
 import com.exponentus.common.model.Attachment;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
@@ -93,13 +95,13 @@ public class CriminalProceedingForm extends _DoPage {
 				return;
 			}
 
-			ClaimDAO dao = new ClaimDAO(session);
-			Claim entity;
+			CriminalProceedingDAO dao = new CriminalProceedingDAO(session);
+			CriminalProceeding entity;
 			String id = formData.getValueSilently("docid");
 			boolean isNew = id.isEmpty();
 
 			if (isNew) {
-				entity = new Claim();
+				entity = new CriminalProceeding();
 			} else {
 				entity = dao.findById(id);
 			}
@@ -139,12 +141,6 @@ public class CriminalProceedingForm extends _DoPage {
 	private _Validation validate(_WebFormData formData, LanguageCode lang) {
 		_Validation ve = new _Validation();
 
-		if (formData.getValueSilently("summary").isEmpty()) {
-			ve.addError("summary", "required", getLocalizedWord("field_is_empty", lang));
-		}
-		if (formData.getValueSilently("content").isEmpty()) {
-			ve.addError("content", "required", getLocalizedWord("field_is_empty", lang));
-		}
 
 		return ve;
 	}
