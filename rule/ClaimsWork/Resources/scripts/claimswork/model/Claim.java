@@ -1,6 +1,7 @@
 package claimswork.model;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ import staff.model.Department;
 @Entity
 @Table(name = "claims")
 @NamedQuery(name = "Claim.findAll", query = "SELECT m FROM Claim AS m ORDER BY m.regDate")
-public class Claim extends SecureAppEntity {
+public class Claim extends SecureAppEntity<UUID> {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false, length = 32)
