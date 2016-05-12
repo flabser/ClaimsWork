@@ -39,6 +39,8 @@ public class Claim extends SecureAppEntity<UUID> {
 
 	private Department department;
 
+	private Employee executor;
+
 	private Long assignee;
 
 	private String basis;
@@ -85,6 +87,12 @@ public class Claim extends SecureAppEntity<UUID> {
 		this.department = department;
 	}
 
+	public Employee getExecutor(){return executor;}
+
+	public void setExecutor(Employee executor) {
+		this.executor = executor;
+	}
+
 	public ResponsibleType getResponsibleType(){return responsible;}
 
 	public void setResponsibleType(ResponsibleType responsible) {
@@ -101,6 +109,12 @@ public class Claim extends SecureAppEntity<UUID> {
 
 	public void setLawArticle(LawArticle lawArticle) {
 		this.lawArticle = lawArticle;
+	}
+
+	public LawBranch getLawBranch(){return branchOfLaw;}
+
+	public void setLawBranch(LawBranch branchOfLaw) {
+		this.branchOfLaw = branchOfLaw;
 	}
 
 	@Override
@@ -125,7 +139,11 @@ public class Claim extends SecureAppEntity<UUID> {
 
 		chunk.append("<regnumber>" + regNumber + "</regnumber>");
 		chunk.append("<department id=\"" + department.getId() + "\">" + department.getLocalizedName(ses.getLang()) + "</department>");
+		chunk.append("<executor id=\"" + executor.getId() + "\">" + executor.getLocalizedName(ses.getLang()) + "</executor>");
 		chunk.append("<responsible id=\"" + responsible.getId() + "\">" + responsible.getLocalizedName(ses.getLang()) + "</responsible>");
+		chunk.append("<lawbranch id=\"" + branchOfLaw.getId() + "\">" + branchOfLaw.getLocalizedName(ses.getLang()) + "</lawbranch>");
+		chunk.append("<lawarticle id=\"" + lawArticle.getId() + "\">" + lawArticle.getLocalizedName(ses.getLang()) + "</lawarticle>");
+		chunk.append("<disputetype id=\"" + disputeType.getId() + "\">" + disputeType.getLocalizedName(ses.getLang()) + "</disputetype>");
 		return chunk.toString();
 	}
 }

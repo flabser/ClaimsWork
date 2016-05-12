@@ -35,12 +35,16 @@ import claimswork.dao.CivilProceedingDAO;
 import claimswork.model.CivilProceeding;
 import reference.dao.DisputeTypeDAO;
 import reference.dao.LawArticleDAO;
+import reference.dao.LawBranchDAO;
 import reference.dao.ResponsibleTypeDAO;
 import reference.model.DisputeType;
 import reference.model.LawArticle;
+import reference.model.LawBranch;
 import reference.model.ResponsibleType;
 import staff.dao.DepartmentDAO;
+import staff.dao.EmployeeDAO;
 import staff.model.Department;
+import staff.model.Employee;
 
 public class CivilProceedingForm extends _DoPage {
 
@@ -61,15 +65,31 @@ public class CivilProceedingForm extends _DoPage {
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
 			entity.setRegNumber("");
+
 			Department tempDpt = new Department();
 			entity.setDepartment(tempDpt);
 			tempDpt.setName("");
+
+			Employee tempEmp = new Employee();
+			entity.setExecutor(tempEmp);
+			tempEmp.setName("");
+
 			ResponsibleType tmpResponsibleType = new ResponsibleType();
 			entity.setResponsibleType(tmpResponsibleType);
 			tmpResponsibleType.setName("");
+
 			DisputeType tmpDisputeType = new DisputeType();
 			entity.setDisputeType(tmpDisputeType);
 			tmpDisputeType.setName("");
+
+			LawBranch tmpLawBranch = new LawBranch();
+			entity.setLawBranch(tmpLawBranch);
+			tmpLawBranch.setName("");
+
+			LawArticle tmpLawArticle = new LawArticle();
+			entity.setLawArticle(tmpLawArticle);
+			tmpLawArticle.setName("");
+
 			String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 			addValue("formsesid", fsId);
 			List<String> formFiles = null;
@@ -151,15 +171,26 @@ public class CivilProceedingForm extends _DoPage {
 				ResponsibleType responsible = rDao.findById(formData.getValueSilently("responsible"));
 				entity.setResponsibleType(responsible);
 			}
-			if (formData.containsField("disputeType")) {
+			if (formData.containsField("disputetype")) {
 				DisputeTypeDAO dtDao = new DisputeTypeDAO(session);
-				DisputeType disputetype = dtDao.findById(formData.getValueSilently("disputeType"));
+				DisputeType disputetype = dtDao.findById(formData.getValueSilently("disputetype"));
 				entity.setDisputeType(disputetype);
 			}
-			if (formData.containsField("lawArticle")) {
+			if (formData.containsField("lawarticle")) {
 				LawArticleDAO laDao = new LawArticleDAO(session);
-				LawArticle lawArticle = laDao.findById(formData.getValueSilently("lawArticle"));
+				LawArticle lawArticle = laDao.findById(formData.getValueSilently("lawarticle"));
 				entity.setLawArticle(lawArticle);
+			}
+			if (formData.containsField("lawbranch")) {
+				LawBranchDAO lbDao = new LawBranchDAO(session);
+				LawBranch lawBranch = lbDao.findById(formData.getValueSilently("lawbranch"));
+				entity.setLawBranch(lawBranch);
+			}
+
+			if (formData.containsField("executor")) {
+				EmployeeDAO eDao = new EmployeeDAO(session);
+				Employee executor = eDao.findById(formData.getValueSilently("executor"));
+				entity.setExecutor(executor);
 			}
 
 			if (isNew) {

@@ -88,7 +88,7 @@
                 <xsl:value-of select="//captions/dispute_type/@caption"/>
             </div>
             <div class="controls">
-                <select name="disputeType" class="span8">
+                <select name="disputetype" class="span8">
                     <xsl:apply-templates select="fields/dispuTetype" mode="selected_options"/>
                 </select>
             </div>

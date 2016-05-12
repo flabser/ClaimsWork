@@ -17,13 +17,13 @@ nbApp.selectOptions = {
     lawbranch: {
         url: 'p?id=get-lawbranch'
     },
-    disputeType: {
+    disputetype: {
         url: 'p?id=get-disputetype'
     },
     executor: {
         url: 'p?id=get-employees'
     },
-    responsibletype: {
+    responsible: {
         url: 'p?id=get-responsibletype'
     }
 };

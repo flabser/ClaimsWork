@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import com.exponentus.common.model.Attachment;
 import com.exponentus.scripting._Session;
 import com.exponentus.util.Util;
+import reference.model.DefendantType;
 
 @Entity
 @Table(name = "civil_proceedings")
@@ -25,9 +26,9 @@ import com.exponentus.util.Util;
 @NamedQuery(name = "CivilProceeding.findAll", query = "SELECT m FROM CivilProceeding AS m ORDER BY m.regDate")
 public class CivilProceeding extends Claim {
 
-	private String claimant;
+	private DefendantType claimant;
 
-	private String defendant;
+	private DefendantType defendant;
 
 	private Date basisDate;
 
@@ -41,12 +42,31 @@ public class CivilProceeding extends Claim {
 	        @JoinColumn(name = "attachment_id", referencedColumnName = "id") })
 	private List<Attachment> stateFeesAttachments;
 
+	public DefendantType getClaimant(){return claimant;}
+
+	public void setClaimant(DefendantType claimant) {
+		this.claimant = claimant;
+	}
+
+	public DefendantType getDefendant(){return defendant;}
+
+	public void setDefendant(DefendantType defendant) {
+		this.defendant = defendant;
+	}
 
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regnumber>" + getRegNumber() + "</regnumber>");
 		chunk.append("<department>" + getDepartment().getLocalizedName(ses.getLang()) + "</department>");
+		return chunk.toString();
+	}
+
+
+	@Override
+	public String getFullXMLChunk(_Session ses) {
+		StringBuilder chunk = new StringBuilder(1000);
+		chunk.append("<test>" + 1 + "</test>");
 		return chunk.toString();
 	}
 }
