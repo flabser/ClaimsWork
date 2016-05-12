@@ -1,5 +1,7 @@
 package claimswork.page.view;
 
+import claimswork.model.CivilProceeding;
+import com.exponentus.exception.SecureException;
 import com.exponentus.scripting._Session;
 import com.exponentus.scripting._WebFormData;
 
@@ -9,6 +11,8 @@ import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
 import com.exponentus.user.IUser;
 import com.exponentus.user.SuperUser;
+
+import java.util.UUID;
 
 public class CivilProceedingView extends AbstractClaimsWorkView {
 
@@ -28,6 +32,14 @@ public class CivilProceedingView extends AbstractClaimsWorkView {
 
 	@Override
 	public void doDELETE(_Session session, _WebFormData formData) {
-
+		CivilProceedingDAO dao = new CivilProceedingDAO(session);
+		for (String id : formData.getListOfValuesSilently("docid")) {
+			CivilProceeding m = dao.findById(UUID.fromString(id));
+			try {
+				dao.delete(m);
+			} catch (SecureException e) {
+				setError(e);
+			}
+		}
 	}
 }

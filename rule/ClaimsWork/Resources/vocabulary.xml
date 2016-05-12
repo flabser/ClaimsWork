@@ -20,9 +20,9 @@
         <entry lang="RUS">Вид спора по отраслям права</entry>
         <entry lang="ENG">Law Branch</entry>
     </sentence>
-    <sentence mode="on" keyword="responsible_type">
-        <entry lang="RUS">Вид ответственного лица</entry>
-        <entry lang="ENG">Responsible type</entry>
+    <sentence mode="on" keyword="responsible">
+        <entry lang="RUS">Ответственный</entry>
+        <entry lang="ENG">Responsible</entry>
     </sentence>
     <sentence mode="on" keyword="claims_work">
         <entry lang="RUS">Претензионно-исковая работа</entry>
@@ -83,5 +83,17 @@
     <sentence mode="on" keyword="contention">
         <entry lang="RUS">Предмет спора</entry>
         <entry lang="ENG">Contention</entry>
+    </sentence>
+    <sentence mode="on" keyword="article">
+        <entry lang="RUS">Статья особенной части кодекса</entry>
+        <entry lang="ENG">Article of the Code</entry>
+    </sentence>
+    <sentence mode="on" keyword="claimant_org_category">
+        <entry lang="RUS">Орган возбудивший производство</entry>
+        <entry lang="ENG">Authority to initiate legal proceedings</entry>
+    </sentence>
+    <sentence mode="on" keyword="damage_caused">
+        <entry lang="RUS">Причененный ущерб</entry>
+        <entry lang="ENG">Damage caused</entry>
     </sentence>
 </vocabulary>

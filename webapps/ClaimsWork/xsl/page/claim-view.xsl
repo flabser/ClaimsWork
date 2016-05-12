@@ -67,10 +67,10 @@
                             <xsl:value-of select="viewcontent/department"/>
                         </span>
                         <span class="vw-order-status">
-                            <xsl:value-of select="viewcontent/proceedings_type"/>
+                            <xsl:value-of select="viewcontent/proceedingtype"/>
                         </span>
                         <span class="vw-order-description">
-                            <xsl:value-of select="viewcontent/content"/>
+                            <xsl:value-of select="viewcontent/basis"/>
                         </span>
                     </div>
                 </a>

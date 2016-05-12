@@ -3,17 +3,7 @@ package claimswork.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.exponentus.common.model.Attachment;
 import com.exponentus.scripting._Session;
@@ -26,8 +16,12 @@ import reference.model.DefendantType;
 @NamedQuery(name = "CivilProceeding.findAll", query = "SELECT m FROM CivilProceeding AS m ORDER BY m.regDate")
 public class CivilProceeding extends Claim {
 
+	@ManyToOne
+	@JoinColumn
 	private DefendantType claimant;
 
+	@ManyToOne
+	@JoinColumn
 	private DefendantType defendant;
 
 	private Date basisDate;
@@ -77,6 +71,9 @@ public class CivilProceeding extends Claim {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regnumber>" + getRegNumber() + "</regnumber>");
 		chunk.append("<department>" + getDepartment().getLocalizedName(ses.getLang()) + "</department>");
+		chunk.append("<executor>" + getExecutor().getLocalizedName(ses.getLang()) + "</executor>");
+		chunk.append("<proceedingtype>" + getProceedingtype() + "</proceedingtype>");
+		chunk.append("<basis>" + getBasis() + "</basis>");
 		return chunk.toString();
 	}
 
@@ -84,6 +81,10 @@ public class CivilProceeding extends Claim {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		return super.getFullXMLChunk(ses) +
-				"<test>" + 1 + "</test>";
+				"<claimant id=\"" + claimant.getId() + "\">" + claimant.getLocalizedName(ses.getLang()) + "</claimant>" +
+				"<defendant id=\"" + defendant.getId() + "\">" + defendant.getLocalizedName(ses.getLang()) + "</defendant>"+
+				"<basisdate>" + Util.convertDateToStringSilently(basisDate) + "</basisdate>"+
+				"<duedate>" + Util.convertDateToStringSilently(dueDate) + "</duedate>"+
+				"<statefees>" + stateFees + "</statefees>";
 	}
 }

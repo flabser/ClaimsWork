@@ -35,6 +35,10 @@
     <caption name="control_date"/>
     <caption name="controldate"/>
     <caption name="dispute_type"/>
-    <caption name="responsible_type"/>
+    <caption name="responsible"/>
     <caption name="state_tax_cost"/>
+    <caption name="article"/>
+    <caption name="claimant_org_category"/>
+    <caption name="claim_decision_type"/>
+    <caption name="damage_caused"/>
 </rule>

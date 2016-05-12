@@ -52,8 +52,8 @@
                             <xsl:call-template name="defendant"/>
                             <xsl:call-template name="lawarticle"/>
                             <xsl:call-template name="contention"/>
-                            <xsl:call-template name="applicationdate"/>
-                            <xsl:call-template name="controldate"/>
+                            <xsl:call-template name="basisdate"/>
+                            <xsl:call-template name="duedate"/>
                             <xsl:call-template name="disputetype"/>
                             <xsl:call-template name="lawbranch"/>
                             <xsl:call-template name="state_fees"/>

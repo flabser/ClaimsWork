@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import claimswork.dao.ClaimDAO;
 import claimswork.model.Claim;
+import com.exponentus.scripting.*;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
@@ -19,10 +20,6 @@ import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
-import com.exponentus.scripting._POJOListWrapper;
-import com.exponentus.scripting._Session;
-import com.exponentus.scripting._Validation;
-import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
@@ -33,14 +30,8 @@ import com.exponentus.webserver.servlet.UploadedFile;
 
 import claimswork.dao.CivilProceedingDAO;
 import claimswork.model.CivilProceeding;
-import reference.dao.DisputeTypeDAO;
-import reference.dao.LawArticleDAO;
-import reference.dao.LawBranchDAO;
-import reference.dao.ResponsibleTypeDAO;
-import reference.model.DisputeType;
-import reference.model.LawArticle;
-import reference.model.LawBranch;
-import reference.model.ResponsibleType;
+import reference.dao.*;
+import reference.model.*;
 import staff.dao.DepartmentDAO;
 import staff.dao.EmployeeDAO;
 import staff.model.Department;
@@ -65,6 +56,7 @@ public class CivilProceedingForm extends _DoPage {
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
 			entity.setRegNumber("");
+			entity.setBasis("");
 
 			Department tempDpt = new Department();
 			entity.setDepartment(tempDpt);
@@ -89,6 +81,11 @@ public class CivilProceedingForm extends _DoPage {
 			LawArticle tmpLawArticle = new LawArticle();
 			entity.setLawArticle(tmpLawArticle);
 			tmpLawArticle.setName("");
+
+			DefendantType tmpDefendantType = new DefendantType();
+			entity.setDefendant(tmpDefendantType);
+			entity.setClaimant(tmpDefendantType);
+			tmpDefendantType.setName("");
 
 			String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 			addValue("formsesid", fsId);
@@ -161,6 +158,11 @@ public class CivilProceedingForm extends _DoPage {
 				}
 			}
 			entity.setRegNumber(formData.getValueSilently("regnumber"));
+			entity.setStateFees(formData.getNumberValueSilently("statefees", 0));
+			entity.setBasisDate(formData.getDateSilently("basisdate"));
+			entity.setDueDate(formData.getDateSilently("duedate"));
+			entity.setBasis(formData.getValueSilently("basis"));
+			entity.setProceedingtype("Гражданский процесс");
 			if (formData.containsField("department")) {
 				DepartmentDAO dDao = new DepartmentDAO(session);
 				Department dept = dDao.findById(formData.getValueSilently("department"));
@@ -193,6 +195,18 @@ public class CivilProceedingForm extends _DoPage {
 				entity.setExecutor(executor);
 			}
 
+			if (formData.containsField("claimant")) {
+				DefendantTypeDAO dDao = new DefendantTypeDAO(session);
+				DefendantType claimant = dDao.findById(formData.getValueSilently("claimant"));
+				entity.setClaimant(claimant);
+			}
+
+			if (formData.containsField("defendant")) {
+				DefendantTypeDAO dDao = new DefendantTypeDAO(session);
+				DefendantType defendant = dDao.findById(formData.getValueSilently("defendant"));
+				entity.setDefendant(defendant);
+			}
+
 			if (isNew) {
 				IUser<Long> user = session.getUser();
 				entity.addReaderEditor(user);
@@ -212,7 +226,43 @@ public class CivilProceedingForm extends _DoPage {
 
 	private _Validation validate(_WebFormData formData, LanguageCode lang) {
 		_Validation ve = new _Validation();
+		if (formData.getValueSilently("claimant").isEmpty()) {
+			ve.addError("claimant", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("regnumber").isEmpty()) {
+			ve.addError("regnumber", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("basis").isEmpty()) {
+			ve.addError("basis", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("responsible").isEmpty()) {
+			ve.addError("responsible", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("defendant").isEmpty()) {
+			ve.addError("defendant", "defendant", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("disputetype").isEmpty()) {
+			ve.addError("disputetype", "defendant", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("department").isEmpty()) {
+			ve.addError("department", "defendant", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("basisdate").isEmpty()) {
+			ve.addError("basisdate", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("lawarticle").isEmpty()) {
+			ve.addError("lawarticle", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("lawbranch").isEmpty()) {
+			ve.addError("lawbranch", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("executor").isEmpty()) {
+			ve.addError("executor", "required", getLocalizedWord("field_is_empty", lang));
+		}
 
+		if (formData.getValueSilently("duedate").isEmpty()) {
+			ve.addError("duedate", "required", getLocalizedWord("field_is_empty", lang));
+		}
 
 		return ve;
 	}

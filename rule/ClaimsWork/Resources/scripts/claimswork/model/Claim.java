@@ -45,6 +45,8 @@ public class Claim extends SecureAppEntity<UUID> {
 
 	private String basis;
 
+	private String proceedingtype;
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinTable(name = "basis_attachments", joinColumns = { @JoinColumn(name = "parent_id", referencedColumnName = "id") }, inverseJoinColumns = {
 	        @JoinColumn(name = "attachment_id", referencedColumnName = "id") })
@@ -72,6 +74,22 @@ public class Claim extends SecureAppEntity<UUID> {
 	@JoinColumn
 	private ResponsibleType responsible;
 
+
+	public String getBasis() {
+		return basis;
+	}
+
+	public void setBasis(String basis) {
+		this.basis = basis;
+	}
+
+	public String getProceedingtype() {
+		return proceedingtype;
+	}
+
+	public void setProceedingtype(String proceedingtype) {
+		this.proceedingtype = proceedingtype;
+	}
 
 	public String getRegNumber() {
 		return regNumber;
@@ -122,6 +140,9 @@ public class Claim extends SecureAppEntity<UUID> {
 		StringBuilder chunk = new StringBuilder(1000);
 		chunk.append("<regnumber>" + regNumber + "</regnumber>");
 		chunk.append("<department>" + department.getLocalizedName(ses.getLang()) + "</department>");
+		chunk.append("<executor>" + executor.getLocalizedName(ses.getLang()) + "</executor>");
+		chunk.append("<proceedingtype>" + proceedingtype + "</proceedingtype>");
+		chunk.append("<basis>" + basis + "</basis>");
 		return chunk.toString();
 	}
 
@@ -144,6 +165,7 @@ public class Claim extends SecureAppEntity<UUID> {
 		chunk.append("<lawbranch id=\"" + branchOfLaw.getId() + "\">" + branchOfLaw.getLocalizedName(ses.getLang()) + "</lawbranch>");
 		chunk.append("<lawarticle id=\"" + lawArticle.getId() + "\">" + lawArticle.getLocalizedName(ses.getLang()) + "</lawarticle>");
 		chunk.append("<disputetype id=\"" + disputeType.getId() + "\">" + disputeType.getLocalizedName(ses.getLang()) + "</disputetype>");
+		chunk.append("<basis>" + basis + "</basis>");
 		return chunk.toString();
 	}
 }

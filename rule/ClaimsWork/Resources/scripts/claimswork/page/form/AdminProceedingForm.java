@@ -22,6 +22,12 @@ import com.exponentus.util.Util;
 import com.exponentus.webserver.servlet.UploadedFile;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.persistence.exceptions.DatabaseException;
+import reference.dao.*;
+import reference.model.*;
+import staff.dao.DepartmentDAO;
+import staff.dao.EmployeeDAO;
+import staff.model.Department;
+import staff.model.Employee;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,18 +44,50 @@ public class AdminProceedingForm extends _DoPage {
 	public void doGET(_Session session, _WebFormData formData) {
 
 		IUser<Long> user = session.getUser();
-		Claim entity;
+		AdminProceeding entity;
 		String id = formData.getValueSilently("docid");
 		if (!id.isEmpty()) {
-			ClaimDAO dao = new ClaimDAO(session);
+			AdminProceedingDAO dao = new AdminProceedingDAO(session);
 			entity = dao.findById(UUID.fromString(id));
 			addValue("formsesid", Util.generateRandomAsText());
 
 			formData.getValueSilently("attachment");
 		} else {
-			entity = new Claim();
+			entity = new AdminProceeding();
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
+			entity.setRegNumber("");
+			entity.setBasis("");
+			entity.setArticle("");
+
+			Department tempDpt = new Department();
+			entity.setDepartment(tempDpt);
+			tempDpt.setName("");
+
+			Employee tempEmp = new Employee();
+			entity.setExecutor(tempEmp);
+			tempEmp.setName("");
+
+			OrgCategory temOrgCategory = new OrgCategory();
+			entity.setClaimantOrgCategory(temOrgCategory);
+			temOrgCategory.setName("");
+
+			ResponsibleType tmpResponsibleType = new ResponsibleType();
+			entity.setResponsibleType(tmpResponsibleType);
+			tmpResponsibleType.setName("");
+
+			DisputeType tmpDisputeType = new DisputeType();
+			entity.setDisputeType(tmpDisputeType);
+			tmpDisputeType.setName("");
+
+			LawBranch tmpLawBranch = new LawBranch();
+			entity.setLawBranch(tmpLawBranch);
+			tmpLawBranch.setName("");
+
+			LawArticle tmpLawArticle = new LawArticle();
+			entity.setLawArticle(tmpLawArticle);
+			tmpLawArticle.setName("");
+
 			String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 			addValue("formsesid", fsId);
 			List<String> formFiles = null;
@@ -120,6 +158,44 @@ public class AdminProceedingForm extends _DoPage {
 					// entity.getAttachments().add(att);
 				}
 			}
+			entity.setRegNumber(formData.getValueSilently("regnumber"));
+			entity.setBasisDate(formData.getDateSilently("basisdate"));
+			entity.setDueDate(formData.getDateSilently("duedate"));
+			entity.setBasis(formData.getValueSilently("basis"));
+			entity.setArticle(formData.getValueSilently("article"));
+			entity.setProceedingtype("Административный процесс");
+			if (formData.containsField("department")) {
+				DepartmentDAO dDao = new DepartmentDAO(session);
+				Department dept = dDao.findById(formData.getValueSilently("department"));
+				entity.setDepartment(dept);
+			}
+			if (formData.containsField("responsible")) {
+				ResponsibleTypeDAO rDao = new ResponsibleTypeDAO(session);
+				ResponsibleType responsible = rDao.findById(formData.getValueSilently("responsible"));
+				entity.setResponsibleType(responsible);
+			}
+			if (formData.containsField("disputetype")) {
+				DisputeTypeDAO dtDao = new DisputeTypeDAO(session);
+				DisputeType disputetype = dtDao.findById(formData.getValueSilently("disputetype"));
+				entity.setDisputeType(disputetype);
+			}
+			if (formData.containsField("lawarticle")) {
+				LawArticleDAO laDao = new LawArticleDAO(session);
+				LawArticle lawArticle = laDao.findById(formData.getValueSilently("lawarticle"));
+				entity.setLawArticle(lawArticle);
+			}
+			if (formData.containsField("lawbranch")) {
+				LawBranchDAO lbDao = new LawBranchDAO(session);
+				LawBranch lawBranch = lbDao.findById(formData.getValueSilently("lawbranch"));
+				entity.setLawBranch(lawBranch);
+			}
+
+			if (formData.containsField("executor")) {
+				EmployeeDAO eDao = new EmployeeDAO(session);
+				Employee executor = eDao.findById(formData.getValueSilently("executor"));
+				entity.setExecutor(executor);
+			}
+
 
 			if (isNew) {
 				IUser<Long> user = session.getUser();
@@ -140,6 +216,37 @@ public class AdminProceedingForm extends _DoPage {
 
 	private _Validation validate(_WebFormData formData, LanguageCode lang) {
 		_Validation ve = new _Validation();
+		if (formData.getValueSilently("regnumber").isEmpty()) {
+			ve.addError("regnumber", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("basis").isEmpty()) {
+			ve.addError("basis", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("responsible").isEmpty()) {
+			ve.addError("responsible", "required", getLocalizedWord("field_is_empty", lang));
+		}
+
+		if (formData.getValueSilently("disputetype").isEmpty()) {
+			ve.addError("disputetype", "defendant", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("department").isEmpty()) {
+			ve.addError("department", "defendant", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("basisdate").isEmpty()) {
+			ve.addError("basisdate", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("lawarticle").isEmpty()) {
+			ve.addError("lawarticle", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("lawbranch").isEmpty()) {
+			ve.addError("lawbranch", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("executor").isEmpty()) {
+			ve.addError("executor", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("duedate").isEmpty()) {
+			ve.addError("duedate", "required", getLocalizedWord("field_is_empty", lang));
+		}
 
 		return ve;
 	}

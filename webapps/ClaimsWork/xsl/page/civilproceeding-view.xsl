@@ -35,9 +35,6 @@
                     <span class="vw-order-status">
                         <xsl:value-of select="//captions/division/@caption"/>
                     </span>
-                    <span class="vw-order-status">
-                        <xsl:value-of select="//captions/proceedings_type/@caption"/>
-                    </span>
                     <span class="vw-order-description">
                         <xsl:value-of select="//captions/content/@caption"/>
                     </span>
@@ -66,11 +63,8 @@
                         <span class="vw-order-status">
                             <xsl:value-of select="viewcontent/department"/>
                         </span>
-                        <span class="vw-order-status">
-                            <xsl:value-of select="viewcontent/proceedings_type"/>
-                        </span>
                         <span class="vw-order-description">
-                            <xsl:value-of select="viewcontent/content"/>
+                            <xsl:value-of select="viewcontent/basis"/>
                         </span>
                     </div>
                 </a>
