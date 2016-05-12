@@ -52,16 +52,16 @@ public class CivilProceedingForm extends _DoPage {
 	public void doGET(_Session session, _WebFormData formData) {
 
 		IUser<Long> user = session.getUser();
-		Claim entity;
+		CivilProceeding entity;
 		String id = formData.getValueSilently("docid");
 		if (!id.isEmpty()) {
-			ClaimDAO dao = new ClaimDAO(session);
+			CivilProceedingDAO dao = new CivilProceedingDAO(session);
 			entity = dao.findById(UUID.fromString(id));
 			addValue("formsesid", Util.generateRandomAsText());
 
 			formData.getValueSilently("attachment");
 		} else {
-			entity = new Claim();
+			entity = new CivilProceeding();
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
 			entity.setRegNumber("");

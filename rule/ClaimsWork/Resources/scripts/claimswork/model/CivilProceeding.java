@@ -54,6 +54,24 @@ public class CivilProceeding extends Claim {
 		this.defendant = defendant;
 	}
 
+	public Date getBasisDate(){return basisDate;}
+
+	public void setBasisDate(Date basisDate) {
+		this.basisDate = basisDate;
+	}
+
+	public Date getDueDate(){return dueDate;}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public int getStateFees(){return stateFees;}
+
+	public void setStateFees(int stateFees) {
+		this.stateFees = stateFees;
+	}
+
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
@@ -65,8 +83,7 @@ public class CivilProceeding extends Claim {
 
 	@Override
 	public String getFullXMLChunk(_Session ses) {
-		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<test>" + 1 + "</test>");
-		return chunk.toString();
+		return super.getFullXMLChunk(ses) +
+				"<test>" + 1 + "</test>";
 	}
 }
