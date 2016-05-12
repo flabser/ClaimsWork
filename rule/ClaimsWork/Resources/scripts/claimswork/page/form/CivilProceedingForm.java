@@ -33,6 +33,12 @@ import com.exponentus.webserver.servlet.UploadedFile;
 
 import claimswork.dao.CivilProceedingDAO;
 import claimswork.model.CivilProceeding;
+import reference.dao.DisputeTypeDAO;
+import reference.dao.LawArticleDAO;
+import reference.dao.ResponsibleTypeDAO;
+import reference.model.DisputeType;
+import reference.model.LawArticle;
+import reference.model.ResponsibleType;
 import staff.dao.DepartmentDAO;
 import staff.model.Department;
 
@@ -54,9 +60,16 @@ public class CivilProceedingForm extends _DoPage {
 			entity = new Claim();
 			entity.setAuthor(user);
 			entity.setRegDate(new Date());
+			entity.setRegNumber("");
 			Department tempDpt = new Department();
 			entity.setDepartment(tempDpt);
 			tempDpt.setName("");
+			ResponsibleType tmpResponsibleType = new ResponsibleType();
+			entity.setResponsibleType(tmpResponsibleType);
+			tmpResponsibleType.setName("");
+			DisputeType tmpDisputeType = new DisputeType();
+			entity.setDisputeType(tmpDisputeType);
+			tmpDisputeType.setName("");
 			String fsId = formData.getValueSilently(EnvConst.FSID_FIELD_NAME);
 			addValue("formsesid", fsId);
 			List<String> formFiles = null;
@@ -132,6 +145,21 @@ public class CivilProceedingForm extends _DoPage {
 				DepartmentDAO dDao = new DepartmentDAO(session);
 				Department dept = dDao.findById(formData.getValueSilently("department"));
 				entity.setDepartment(dept);
+			}
+			if (formData.containsField("responsible")) {
+				ResponsibleTypeDAO rDao = new ResponsibleTypeDAO(session);
+				ResponsibleType responsible = rDao.findById(formData.getValueSilently("responsible"));
+				entity.setResponsibleType(responsible);
+			}
+			if (formData.containsField("disputeType")) {
+				DisputeTypeDAO dtDao = new DisputeTypeDAO(session);
+				DisputeType disputetype = dtDao.findById(formData.getValueSilently("disputeType"));
+				entity.setDisputeType(disputetype);
+			}
+			if (formData.containsField("lawArticle")) {
+				LawArticleDAO laDao = new LawArticleDAO(session);
+				LawArticle lawArticle = laDao.findById(formData.getValueSilently("lawArticle"));
+				entity.setLawArticle(lawArticle);
 			}
 
 			if (isNew) {

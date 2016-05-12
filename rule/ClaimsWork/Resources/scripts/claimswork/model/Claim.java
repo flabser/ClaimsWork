@@ -85,6 +85,24 @@ public class Claim extends SecureAppEntity<UUID> {
 		this.department = department;
 	}
 
+	public ResponsibleType getResponsibleType(){return responsible;}
+
+	public void setResponsibleType(ResponsibleType responsible) {
+		this.responsible = responsible;
+	}
+
+	public DisputeType getDisputeType(){return disputeType;}
+
+	public void setDisputeType(DisputeType disputeType) {
+		this.disputeType = disputeType;
+	}
+
+	public LawArticle getLawArticle(){return lawArticle;}
+
+	public void setLawArticle(LawArticle lawArticle) {
+		this.lawArticle = lawArticle;
+	}
+
 	@Override
 	public String getShortXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
@@ -107,6 +125,7 @@ public class Claim extends SecureAppEntity<UUID> {
 
 		chunk.append("<regnumber>" + regNumber + "</regnumber>");
 		chunk.append("<department id=\"" + department.getId() + "\">" + department.getLocalizedName(ses.getLang()) + "</department>");
+		chunk.append("<responsible id=\"" + responsible.getId() + "\">" + responsible.getLocalizedName(ses.getLang()) + "</responsible>");
 		return chunk.toString();
 	}
 }

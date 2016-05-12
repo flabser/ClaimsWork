@@ -130,8 +130,8 @@
                 <xsl:value-of select="//captions/responsible_type/@caption"/>
             </div>
             <div class="controls">
-                <select name="responsibletype" class="span6">
-                    <xsl:apply-templates select="fields/responsibletype" mode="selected_options"/>
+                <select name="responsible" class="span6">
+                    <xsl:apply-templates select="fields/responsible" mode="selected_options"/>
                 </select>
             </div>
         </div>
