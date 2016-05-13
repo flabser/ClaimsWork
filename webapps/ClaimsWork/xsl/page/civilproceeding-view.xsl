@@ -10,10 +10,10 @@
         <div class="content-header">
             <xsl:variable name="viewtitle">
                 <xsl:choose>
-                    <xsl:when test="//query/@entity = 'civilproceeding'">
+                    <xsl:when test="/request/@id = 'civilproceeding-view'">
                         <xsl:value-of select="//captions/civil_proceedings/@caption"/>
                     </xsl:when>
-                    <xsl:when test="//query/@entity = 'adminproceeding'">
+                    <xsl:when test="/request/@id = 'adminproceeding-view'">
                         <xsl:value-of select="//captions/admin_proceedings/@caption"/>
                     </xsl:when>
                     <xsl:otherwise>
