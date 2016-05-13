@@ -3773,6 +3773,9 @@ nbApp.selectOptions = {
 	},
 	responsible: {
 		url: 'p?id=get-responsibletype'
+	},
+	claimantorgcategory: {
+		url: 'p?id=get-orgcategory'
 	}
 };
 

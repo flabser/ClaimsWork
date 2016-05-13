@@ -196,6 +196,12 @@ public class AdminProceedingForm extends _DoPage {
 				entity.setExecutor(executor);
 			}
 
+			if (formData.containsField("claimantorgcategory")) {
+				OrgCategoryDAO oDao = new OrgCategoryDAO(session);
+				OrgCategory orgCategory = oDao.findById(formData.getValueSilently("claimantorgcategory"));
+				entity.setClaimantOrgCategory(orgCategory);
+			}
+
 
 			if (isNew) {
 				IUser<Long> user = session.getUser();
@@ -218,6 +224,9 @@ public class AdminProceedingForm extends _DoPage {
 		_Validation ve = new _Validation();
 		if (formData.getValueSilently("regnumber").isEmpty()) {
 			ve.addError("regnumber", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("claimantorgcategory").isEmpty()) {
+			ve.addError("claimantorgcategory", "required", getLocalizedWord("field_is_empty", lang));
 		}
 		if (formData.getValueSilently("basis").isEmpty()) {
 			ve.addError("basis", "required", getLocalizedWord("field_is_empty", lang));
