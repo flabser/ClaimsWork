@@ -138,7 +138,7 @@
     </xsl:template>
 
     <xsl:template name="decisiontype">
-        <!-- Основание для возбуждения ПИР -->
+        <!-- Решения принимаемые органом уголовного преследования  -->
         <div class="form-group">
             <div class="control-label">
                 <xsl:value-of select="//captions/claim_decision_type/@caption"/>
@@ -199,6 +199,30 @@
             </div>
             <div class="controls">
                 <input type="date" name="duedate" value="{fields/duedate}" class="span2"/>
+            </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="notificationreceivingdate">
+        <!-- Дата получения уведомления -->
+        <div class="form-group">
+            <div class="control-label">
+                <xsl:value-of select="//captions/notification_receiving_date/@caption"/>
+            </div>
+            <div class="controls">
+                <input type="date" name="notificationreceivingdate" value="{fields/notificationreceivingdate}" class="span2"/>
+            </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="preliminaryinvestigationdate">
+        <!-- Срок предварительного расследования -->
+        <div class="form-group">
+            <div class="control-label">
+                <xsl:value-of select="//captions/preliminary_investigation_date/@caption"/>
+            </div>
+            <div class="controls">
+                <input type="date" name="preliminaryinvestigationdate" value="{fields/preliminaryinvestigationdate}" class="span2"/>
             </div>
         </div>
     </xsl:template>

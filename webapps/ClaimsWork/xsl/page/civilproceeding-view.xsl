@@ -8,8 +8,22 @@
 
     <xsl:template name="_content">
         <div class="content-header">
+            <xsl:variable name="viewtitle">
+                <xsl:choose>
+                    <xsl:when test="//query/@entity = 'civilproceeding'">
+                        <xsl:value-of select="//captions/civil_proceedings/@caption"/>
+                    </xsl:when>
+                    <xsl:when test="//query/@entity = 'adminproceeding'">
+                        <xsl:value-of select="//captions/admin_proceedings/@caption"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="//captions/criminal_proceedings/@caption"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+
             <xsl:call-template name="page-info">
-                <xsl:with-param name="title" select="//captions/civil_proceedings/@caption"/>
+                <xsl:with-param name="title" select="$viewtitle"/>
             </xsl:call-template>
         </div>
         <div class="content-body">

@@ -41,4 +41,6 @@
     <caption name="claimant_org_category"/>
     <caption name="claim_decision_type"/>
     <caption name="damage_caused"/>
+    <caption name="notification_receiving_date"/>
+    <caption name="preliminary_investigation_date"/>
 </rule>

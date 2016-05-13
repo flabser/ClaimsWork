@@ -77,11 +77,7 @@
         <entry lang="ENG">State tax cost</entry>
     </sentence>
     <sentence mode="on" keyword="contention">
-        <entry lang="RUS">Предмет спора</entry>
-        <entry lang="ENG">Contention</entry>
-    </sentence>
-    <sentence mode="on" keyword="contention">
-        <entry lang="RUS">Предмет спора</entry>
+        <entry lang="RUS">Суть дела</entry>
         <entry lang="ENG">Contention</entry>
     </sentence>
     <sentence mode="on" keyword="article">
@@ -95,5 +91,13 @@
     <sentence mode="on" keyword="damage_caused">
         <entry lang="RUS">Причененный ущерб</entry>
         <entry lang="ENG">Damage caused</entry>
+    </sentence>
+    <sentence mode="on" keyword="preliminary_investigation_date">
+        <entry lang="RUS">Срок предварительного расследования</entry>
+        <entry lang="ENG">Preliminary investigation date</entry>
+    </sentence>
+    <sentence mode="on" keyword="notification_receiving_date">
+        <entry lang="RUS">Дата получения уведомления</entry>
+        <entry lang="ENG">Notification receiving date</entry>
     </sentence>
 </vocabulary>

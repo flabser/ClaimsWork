@@ -58,6 +58,8 @@ public class CriminalProceedingForm extends _DoPage {
 			entity.setRegDate(new Date());
 			entity.setRegNumber("");
 			entity.setBasis("");
+			entity.setArticle("");
+			entity.setDamageCaused("");
 
 			Department tempDpt = new Department();
 			entity.setDepartment(tempDpt);
@@ -169,7 +171,9 @@ public class CriminalProceedingForm extends _DoPage {
 			entity.setNotificationReceivingDate(formData.getDateSilently("notificationreceivingdate"));
 			entity.setPreliminaryInvestigationDate(formData.getDateSilently("preliminaryinvestigationdate"));
 			entity.setBasis(formData.getValueSilently("basis"));
-			entity.setProceedingtype("Гражданский процесс");
+			entity.setArticle(formData.getValueSilently("article"));
+			entity.setDamageCaused(formData.getValueSilently("damagecaused"));
+			entity.setProceedingtype("Уголовный процесс");
 			if (formData.containsField("department")) {
 				DepartmentDAO dDao = new DepartmentDAO(session);
 				Department dept = dDao.findById(formData.getValueSilently("department"));
@@ -202,6 +206,24 @@ public class CriminalProceedingForm extends _DoPage {
 				entity.setExecutor(executor);
 			}
 
+			if (formData.containsField("claimantorgcategory")) {
+				OrgCategoryDAO oDao = new OrgCategoryDAO(session);
+				OrgCategory orgCategory = oDao.findById(formData.getValueSilently("claimantorgcategory"));
+				entity.setClaimantOrgCategory(orgCategory);
+			}
+
+			if (formData.containsField("decisiontype")) {
+				ClaimantDecisionTypeDAO oDao = new ClaimantDecisionTypeDAO(session);
+				ClaimantDecisionType DecisionType = oDao.findById(formData.getValueSilently("decisiontype"));
+				entity.setDecisionType(DecisionType);
+			}
+
+			if (formData.containsField("defendant")) {
+				DefendantTypeDAO dDao = new DefendantTypeDAO(session);
+				DefendantType DefendantType = dDao.findById(formData.getValueSilently("defendant"));
+				entity.setDefendantType(DefendantType);
+			}
+
 			if (isNew) {
 				IUser<Long> user = session.getUser();
 				entity.addReaderEditor(user);
@@ -224,6 +246,9 @@ public class CriminalProceedingForm extends _DoPage {
 		if (formData.getValueSilently("regnumber").isEmpty()) {
 			ve.addError("regnumber", "required", getLocalizedWord("field_is_empty", lang));
 		}
+		if (formData.getValueSilently("claimantorgcategory").isEmpty()) {
+			ve.addError("claimantorgcategory", "required", getLocalizedWord("field_is_empty", lang));
+		}
 		if (formData.getValueSilently("basis").isEmpty()) {
 			ve.addError("basis", "required", getLocalizedWord("field_is_empty", lang));
 		}
@@ -231,13 +256,16 @@ public class CriminalProceedingForm extends _DoPage {
 			ve.addError("responsible", "required", getLocalizedWord("field_is_empty", lang));
 		}
 		if (formData.getValueSilently("disputetype").isEmpty()) {
-			ve.addError("disputetype", "defendant", getLocalizedWord("field_is_empty", lang));
+			ve.addError("disputetype", "required", getLocalizedWord("field_is_empty", lang));
 		}
 		if (formData.getValueSilently("department").isEmpty()) {
-			ve.addError("department", "defendant", getLocalizedWord("field_is_empty", lang));
+			ve.addError("department", "required", getLocalizedWord("field_is_empty", lang));
 		}
-		if (formData.getValueSilently("basisdate").isEmpty()) {
-			ve.addError("basisdate", "required", getLocalizedWord("field_is_empty", lang));
+		if (formData.getValueSilently("decisiontype").isEmpty()) {
+			ve.addError("decisiontype", "required", getLocalizedWord("field_is_empty", lang));
+		}
+		if (formData.getValueSilently("notificationreceivingdate").isEmpty()) {
+			ve.addError("notificationreceivingdate", "required", getLocalizedWord("field_is_empty", lang));
 		}
 		if (formData.getValueSilently("lawarticle").isEmpty()) {
 			ve.addError("lawarticle", "required", getLocalizedWord("field_is_empty", lang));
@@ -248,9 +276,12 @@ public class CriminalProceedingForm extends _DoPage {
 		if (formData.getValueSilently("executor").isEmpty()) {
 			ve.addError("executor", "required", getLocalizedWord("field_is_empty", lang));
 		}
+		if (formData.getValueSilently("defendant").isEmpty()) {
+			ve.addError("defendant", "required", getLocalizedWord("field_is_empty", lang));
+		}
 
-		if (formData.getValueSilently("duedate").isEmpty()) {
-			ve.addError("duedate", "required", getLocalizedWord("field_is_empty", lang));
+		if (formData.getValueSilently("preliminaryinvestigationdate").isEmpty()) {
+			ve.addError("preliminaryinvestigationdate", "required", getLocalizedWord("field_is_empty", lang));
 		}
 
 		return ve;

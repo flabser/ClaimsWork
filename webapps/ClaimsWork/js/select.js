@@ -28,5 +28,8 @@ nbApp.selectOptions = {
     },
     claimantorgcategory: {
         url: 'p?id=get-orgcategory'
+    },
+    decisiontype: {
+        url: 'p?id=get-claimdecisiontype'
     }
 };

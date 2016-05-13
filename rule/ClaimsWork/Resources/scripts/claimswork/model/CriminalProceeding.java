@@ -116,7 +116,7 @@ public class CriminalProceeding extends Claim {
 		return super.getFullXMLChunk(ses) +
 				"<claimantorgcategory id=\"" + claimantOrgCategory.getId() + "\">" + claimantOrgCategory.getLocalizedName(ses.getLang()) + "</claimantorgcategory>" +
 				"<decisiontype id=\"" + decisionType.getId() + "\">" + decisionType.getLocalizedName(ses.getLang()) + "</decisiontype>" +
-				"<defendanttype id=\"" + defendantType.getId() + "\">" + defendantType.getLocalizedName(ses.getLang()) + "</defendanttype>" +
+				"<defendant id=\"" + defendantType.getId() + "\">" + defendantType.getLocalizedName(ses.getLang()) + "</defendant>" +
 				"<notificationreceivingdate>" + Util.convertDateToStringSilently(notificationReceivingDate) + "</notificationreceivingdate>"+
 				"<preliminaryinvestigationdate>" + Util.convertDateToStringSilently(preliminaryInvestigationDate) + "</preliminaryinvestigationdate>"+
 				"<article>" + article + "</article>"+

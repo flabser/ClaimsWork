@@ -53,8 +53,8 @@
                             <xsl:call-template name="lawarticle"/>
                             <xsl:call-template name="decisiontype"/>
                             <xsl:call-template name="contention"/>
-                            <xsl:call-template name="basisdate"/>
-                            <xsl:call-template name="duedate"/>
+                            <xsl:call-template name="notificationreceivingdate"/>
+                            <xsl:call-template name="preliminaryinvestigationdate"/>
                             <xsl:call-template name="disputetype"/>
                             <xsl:call-template name="lawbranch"/>
                             <xsl:call-template name="article"/>
