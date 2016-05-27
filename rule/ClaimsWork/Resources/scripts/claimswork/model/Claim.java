@@ -18,12 +18,14 @@ import javax.persistence.Table;
 
 import com.exponentus.common.model.Attachment;
 import com.exponentus.dataengine.jpa.SecureAppEntity;
+import com.exponentus.scripting._Session;
+import com.exponentus.util.Util;
 
 import claimswork.model.constants.ProceedingStatusType;
-import com.exponentus.scripting._Session;
-import com.exponentus.util.NumberUtil;
-import com.exponentus.util.Util;
-import reference.model.*;
+import reference.model.DisputeType;
+import reference.model.LawArticle;
+import reference.model.LawBranch;
+import reference.model.ResponsibleType;
 import staff.dao.EmployeeDAO;
 import staff.model.Department;
 import staff.model.Employee;
@@ -74,7 +76,6 @@ public class Claim extends SecureAppEntity<UUID> {
 	@JoinColumn
 	private ResponsibleType responsible;
 
-
 	public String getBasis() {
 		return basis;
 	}
@@ -99,37 +100,49 @@ public class Claim extends SecureAppEntity<UUID> {
 		this.regNumber = regNumber;
 	}
 
-	public Department getDepartment(){return department;}
+	public Department getDepartment() {
+		return department;
+	}
 
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
 
-	public Employee getExecutor(){return executor;}
+	public Employee getExecutor() {
+		return executor;
+	}
 
 	public void setExecutor(Employee executor) {
 		this.executor = executor;
 	}
 
-	public ResponsibleType getResponsibleType(){return responsible;}
+	public ResponsibleType getResponsibleType() {
+		return responsible;
+	}
 
 	public void setResponsibleType(ResponsibleType responsible) {
 		this.responsible = responsible;
 	}
 
-	public DisputeType getDisputeType(){return disputeType;}
+	public DisputeType getDisputeType() {
+		return disputeType;
+	}
 
 	public void setDisputeType(DisputeType disputeType) {
 		this.disputeType = disputeType;
 	}
 
-	public LawArticle getLawArticle(){return lawArticle;}
+	public LawArticle getLawArticle() {
+		return lawArticle;
+	}
 
 	public void setLawArticle(LawArticle lawArticle) {
 		this.lawArticle = lawArticle;
 	}
 
-	public LawBranch getLawBranch(){return branchOfLaw;}
+	public LawBranch getLawBranch() {
+		return branchOfLaw;
+	}
 
 	public void setLawBranch(LawBranch branchOfLaw) {
 		this.branchOfLaw = branchOfLaw;
@@ -149,7 +162,7 @@ public class Claim extends SecureAppEntity<UUID> {
 	@Override
 	public String getFullXMLChunk(_Session ses) {
 		StringBuilder chunk = new StringBuilder(1000);
-		chunk.append("<regdate>" + Util.simpleDateTimeFormat.format(regDate) + "</regdate>");
+		chunk.append("<regdate>" + Util.convertDataTimeToString(regDate) + "</regdate>");
 		EmployeeDAO eDao = new EmployeeDAO(ses);
 		Employee user = eDao.findByUserId(author);
 		if (user != null) {

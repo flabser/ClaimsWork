@@ -2,10 +2,17 @@ package claimswork.model;
 
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import com.exponentus.scripting._Session;
 import com.exponentus.util.Util;
+
 import reference.model.OrgCategory;
 
 @Entity
@@ -24,25 +31,33 @@ public class AdminProceeding extends Claim {
 
 	private String article;
 
-	public OrgCategory getClaimantOrgCategory(){return claimantOrgCategory;}
+	public OrgCategory getClaimantOrgCategory() {
+		return claimantOrgCategory;
+	}
 
 	public void setClaimantOrgCategory(OrgCategory claimantOrgCategory) {
 		this.claimantOrgCategory = claimantOrgCategory;
 	}
 
-	public Date getBasisDate(){return basisDate;}
+	public Date getBasisDate() {
+		return basisDate;
+	}
 
 	public void setBasisDate(Date basisDate) {
 		this.basisDate = basisDate;
 	}
 
-	public Date getDueDate(){return dueDate;}
+	public Date getDueDate() {
+		return dueDate;
+	}
 
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
-	public String getArticle(){return article;}
+	public String getArticle() {
+		return article;
+	}
 
 	public void setArticle(String article) {
 		this.article = article;
@@ -59,13 +74,11 @@ public class AdminProceeding extends Claim {
 		return chunk.toString();
 	}
 
-
 	@Override
 	public String getFullXMLChunk(_Session ses) {
-		return super.getFullXMLChunk(ses) +
-				"<claimantorgcategory id=\"" + claimantOrgCategory.getId() + "\">" + claimantOrgCategory.getLocalizedName(ses.getLang()) + "</claimantorgcategory>" +
-				"<basisdate>" + Util.convertDateToStringSilently(basisDate) + "</basisdate>"+
-				"<duedate>" + Util.convertDateToStringSilently(dueDate) + "</duedate>"+
-				"<article>" + article + "</article>";
+		return super.getFullXMLChunk(ses) + "<claimantorgcategory id=\"" + claimantOrgCategory.getId() + "\">"
+		        + claimantOrgCategory.getLocalizedName(ses.getLang()) + "</claimantorgcategory>" + "<basisdate>"
+		        + Util.convertDataTimeToStringSilently(basisDate) + "</basisdate>" + "<duedate>" + Util.convertDateToStringSilently(dueDate)
+		        + "</duedate>" + "<article>" + article + "</article>";
 	}
 }
