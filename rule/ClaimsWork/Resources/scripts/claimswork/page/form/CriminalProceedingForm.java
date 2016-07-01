@@ -1,9 +1,16 @@
 package claimswork.page.form;
 
-import claimswork.dao.ClaimDAO;
-import claimswork.dao.CriminalProceedingDAO;
-import claimswork.model.Claim;
-import claimswork.model.CriminalProceeding;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.apache.commons.io.IOUtils;
+import org.eclipse.persistence.exceptions.DatabaseException;
+
 import com.exponentus.common.model.Attachment;
 import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
@@ -20,23 +27,27 @@ import com.exponentus.scripting.event._DoPage;
 import com.exponentus.user.IUser;
 import com.exponentus.util.Util;
 import com.exponentus.webserver.servlet.UploadedFile;
-import org.apache.commons.io.IOUtils;
-import org.eclipse.persistence.exceptions.DatabaseException;
-import reference.dao.*;
-import reference.model.*;
+
+import claimswork.dao.CriminalProceedingDAO;
+import claimswork.model.CriminalProceeding;
+import reference.dao.ClaimantDecisionTypeDAO;
+import reference.dao.DefendantTypeDAO;
+import reference.dao.DisputeTypeDAO;
+import reference.dao.LawArticleDAO;
+import reference.dao.LawBranchDAO;
+import reference.dao.OrgCategoryDAO;
+import reference.dao.ResponsibleTypeDAO;
+import reference.model.ClaimantDecisionType;
+import reference.model.DefendantType;
+import reference.model.DisputeType;
+import reference.model.LawArticle;
+import reference.model.LawBranch;
+import reference.model.OrgCategory;
+import reference.model.ResponsibleType;
 import staff.dao.DepartmentDAO;
 import staff.dao.EmployeeDAO;
 import staff.model.Department;
 import staff.model.Employee;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 public class CriminalProceedingForm extends _DoPage {
 
@@ -55,7 +66,6 @@ public class CriminalProceedingForm extends _DoPage {
 		} else {
 			entity = new CriminalProceeding();
 			entity.setAuthor(user);
-			entity.setRegDate(new Date());
 			entity.setRegNumber("");
 			entity.setBasis("");
 			entity.setArticle("");

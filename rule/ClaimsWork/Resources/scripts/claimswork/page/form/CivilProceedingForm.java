@@ -5,13 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import claimswork.dao.ClaimDAO;
-import claimswork.model.Claim;
-import com.exponentus.scripting.*;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
@@ -20,6 +16,10 @@ import com.exponentus.env.EnvConst;
 import com.exponentus.env.Environment;
 import com.exponentus.exception.SecureException;
 import com.exponentus.localization.LanguageCode;
+import com.exponentus.scripting._POJOListWrapper;
+import com.exponentus.scripting._Session;
+import com.exponentus.scripting._Validation;
+import com.exponentus.scripting._WebFormData;
 import com.exponentus.scripting.actions._Action;
 import com.exponentus.scripting.actions._ActionBar;
 import com.exponentus.scripting.actions._ActionType;
@@ -30,8 +30,16 @@ import com.exponentus.webserver.servlet.UploadedFile;
 
 import claimswork.dao.CivilProceedingDAO;
 import claimswork.model.CivilProceeding;
-import reference.dao.*;
-import reference.model.*;
+import reference.dao.DefendantTypeDAO;
+import reference.dao.DisputeTypeDAO;
+import reference.dao.LawArticleDAO;
+import reference.dao.LawBranchDAO;
+import reference.dao.ResponsibleTypeDAO;
+import reference.model.DefendantType;
+import reference.model.DisputeType;
+import reference.model.LawArticle;
+import reference.model.LawBranch;
+import reference.model.ResponsibleType;
 import staff.dao.DepartmentDAO;
 import staff.dao.EmployeeDAO;
 import staff.model.Department;
@@ -54,7 +62,6 @@ public class CivilProceedingForm extends _DoPage {
 		} else {
 			entity = new CivilProceeding();
 			entity.setAuthor(user);
-			entity.setRegDate(new Date());
 			entity.setRegNumber("");
 			entity.setBasis("");
 
