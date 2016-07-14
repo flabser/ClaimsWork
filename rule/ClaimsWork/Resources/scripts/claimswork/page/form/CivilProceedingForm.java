@@ -226,7 +226,7 @@ public class CivilProceedingForm extends _DoPage {
 		} catch (SecureException e) {
 			setError(e);
 		} catch (DatabaseException | IOException e) {
-			error(e);
+			logError(e);
 			setBadRequest();
 		}
 	}
